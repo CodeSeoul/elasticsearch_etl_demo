@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/python
+# Created by https://www.gitignore.io/api/python,virtualenv
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -101,5 +101,20 @@ ENV/
 # mkdocs documentation
 /site
 
-# End of https://www.gitignore.io/api/python
+### VirtualEnv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Mm]an
+[Ss]cripts
+[Tt]cl
+pyvenv.cfg
+pip-selfcheck.json
 
+# End of https://www.gitignore.io/api/python,virtualenv
+
+share/
