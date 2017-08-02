@@ -6,10 +6,11 @@ from elasticsearch import Elasticsearch
 from pprint import PrettyPrinter
 from configparser import ConfigParser
 from os.path import splitext
+from datetime import datetime
 
 printer = PrettyPrinter(indent=2)
 
-ACCEPTABLE_FILE_TYPES = ('java', 'py', 'rb', 'js', 'go')
+ACCEPTABLE_FILE_TYPES = ('.java', '.py', '.rb', '.js', '.go')
 
 def main():
     config = ConfigParser()
@@ -42,7 +43,7 @@ def main():
         while len(result) > 0:
             item = result.pop()
             print('item name:', item['name'])
-            create_document_from_item(repo, item)
+            create_document_from_item(es, repo, item)
             if item['type'] == 'dir':
                 url = item['_links']['self'] + '&' + oauth_string
                 #print('url:', url)
@@ -51,20 +52,20 @@ def main():
                 result.extend(dir_contents)
             
 
-def create_document_from_item(repo, item):
-    if item['type'] == 'file' and splitext(item['name'])[1] in ACCEPTABLE_FILE_TYPES:
-        print(requests.get(item['download_url']).text)
-
+def create_document_from_item(es, repo, item):
+    file_name, file_extension = splitext(item['name'])
+    if item['type'] == 'file' and file_extension in ACCEPTABLE_FILE_TYPES:
         document = {
                     'name': item['name'],
                     'url': item['download_url'],
                     'user': 'TheBeege',
                     'size': item['size'],
-                    'file_type': splitext(item['name'])[1],
+                    'file_extension': file_extension,
                     'repo': repo,
-                    'contents': requests.get(item['download_url']).text
+                    'contents': requests.get(item['download_url']).text,
+                    'timestamp': datetime.now()
                 }
-        printer.pprint(document)
+        es.index(index='github', doc_type='source_file', id=item['_links']['self'], body=document)
 
 
 if __name__ == '__main__':
