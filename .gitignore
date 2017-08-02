@@ -192,3 +192,6 @@ pip-selfcheck.json
 # End of https://www.gitignore.io/api/venv,python,virtualenv,intellij+all
 
 share/
+default.conf
+
+.*.swp
