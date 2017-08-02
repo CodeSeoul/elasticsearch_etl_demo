@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/python,virtualenv,intellij+all
+# Created by https://www.gitignore.io/api/venv,python,virtualenv,intellij+all
 
 ### Intellij+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
@@ -162,6 +162,20 @@ ENV/
 # mkdocs documentation
 /site
 
+### venv ###
+# Linux
+bin/ 
+include/
+
+# Window
+Include/
+Lib/
+Scripts/
+
+# Shared
+pyvenv.cfg
+
+
 ### VirtualEnv ###
 # Virtualenv
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
@@ -173,9 +187,8 @@ ENV/
 [Mm]an
 [Ss]cripts
 [Tt]cl
-pyvenv.cfg
 pip-selfcheck.json
 
-# End of https://www.gitignore.io/api/python,virtualenv,intellij+all
+# End of https://www.gitignore.io/api/venv,python,virtualenv,intellij+all
 
 share/
